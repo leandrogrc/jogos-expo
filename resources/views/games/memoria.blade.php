@@ -62,11 +62,8 @@
     .memory-game {
         width: 100%;
         max-width: 900px;
-        /* Limite a largura máxima do jogo */
         margin: 50px auto;
         display: grid;
-        /* Essa é a parte mais importante. O grid irá criar colunas de forma automática */
-        /* A largura mínima de cada card será 120px, e ela irá se expandir até preencher o espaço disponível */
         grid-template-columns: repeat(6, minmax(10px, 1fr));
         gap: 10px;
         perspective: 1000px;
@@ -80,9 +77,30 @@
     }
 
     @media (orientation: portrait) {
-        .memory-game {
-            grid-template-columns: repeat(3, minmax(10px, 1fr));
-            grid-template-rows: repeat(6, 1fr);
+        @media (max-width: 700px) {
+            .memory-game {
+                grid-template-columns: repeat(3, minmax(10px, 1fr));
+                grid-template-rows: repeat(6, 1fr);
+                gap: 1.4rem;
+            }
+
+            .memory-card {
+                width: 7rem;
+                height: auto;
+                aspect-ratio: 1/1;
+            }
+
+            #times {
+                font-size: .8rem;
+            }
+
+            #timer {
+                font-size: 1rem;
+            }
+
+            #logo {
+                height: 4rem;
+            }
         }
     }
 
@@ -97,8 +115,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        /* A propriedade aspect-ratio é a chave para o card quadrado perfeito */
         aspect-ratio: 1 / 1;
+        border: 0.5rem solid #fff;
     }
 
     .memory-card:hover {
@@ -124,6 +142,9 @@
 
     .back-face {
         transform: rotateY(0deg);
+        background-color: lightblue;
+        border-radius: 5%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
     .front-face {
