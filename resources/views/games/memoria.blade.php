@@ -6,7 +6,7 @@
     main {
         display: flex;
         flex-direction: column;
-        min-width: 800px;
+        /* Removido min-width para melhor adaptação em telas pequenas */
     }
 
     /* Cabeçalho e Footer */
@@ -58,22 +58,35 @@
         text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
     }
 
-    /* Jogo */
+    /* Jogo - Totalmente responsivo com CSS Grid */
     .memory-game {
         width: 100%;
-        max-width: 800px;
-        height: auto;
+        max-width: 900px;
+        /* Limite a largura máxima do jogo */
         margin: 50px auto;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        perspective: 1000px;
+        display: grid;
+        /* Essa é a parte mais importante. O grid irá criar colunas de forma automática */
+        /* A largura mínima de cada card será 120px, e ela irá se expandir até preencher o espaço disponível */
+        grid-template-columns: repeat(6, minmax(10px, 1fr));
         gap: 10px;
+        perspective: 1000px;
+        padding: 10px;
+    }
+
+    @media (max-width: 800px) {
+        .memory-game {
+            max-width: 600px;
+        }
+    }
+
+    @media (orientation: portrait) {
+        .memory-game {
+            grid-template-columns: repeat(3, minmax(10px, 1fr));
+            grid-template-rows: repeat(6, 1fr);
+        }
     }
 
     .memory-card {
-        width: calc(16.666% - 10px);
-        height: 120px;
         position: relative;
         transform-style: preserve-3d;
         transition: transform 0.5s, box-shadow 0.3s;
@@ -84,13 +97,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-    }
-
-    .back-face {
-        background-color: lightblue;
-        border-radius: 5%;
-        padding: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        /* A propriedade aspect-ratio é a chave para o card quadrado perfeito */
+        aspect-ratio: 1 / 1;
     }
 
     .memory-card:hover {
@@ -104,12 +112,14 @@
 
     .front-face,
     .back-face {
-        width: 80%;
-        height: 80%;
+        width: 100%;
+        height: 100%;
         position: absolute;
         backface-visibility: hidden;
         object-fit: contain;
         transition: all 0.3s;
+        border-radius: 10px;
+        padding: 5px;
     }
 
     .back-face {
@@ -120,7 +130,7 @@
         transform: rotateY(180deg);
     }
 
-    /* Modal de Vitória */
+    /* Modal e Tabela de Pontuação */
     .modal {
         display: none;
         position: fixed;
@@ -216,7 +226,7 @@
         box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
     }
 
-    /* Animações */
+    /* Animações (não foram alteradas) */
     @keyframes fadeIn {
         from {
             opacity: 0;
@@ -239,37 +249,7 @@
         }
     }
 
-    /* Responsividade */
-    @media (max-width: 768px) {
-        .memory-card {
-            /* width: calc(25% - 10px); */
-            height: 100px;
-        }
-
-        #logo {
-            height: 90px;
-        }
-
-        #timer {
-            font-size: 22px;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .memory-card {
-            /* width: calc(33.333% - 10px); */
-            height: 10em;
-        }
-
-        .modal-content {
-            padding: 20px;
-        }
-
-        .modal h2 {
-            font-size: 22px;
-        }
-    }
-
+    /* Estilos para a tabela de pontuação */
     #score-table {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         max-width: 400px;
@@ -323,6 +303,11 @@
         display: flex;
         flex-direction: row;
         align-items: center;
+        flex-wrap: wrap;
+        /* Permite que o timer e a tabela quebrem a linha */
+        justify-content: center;
+        /* Centraliza os itens em telas menores */
+        gap: 20px;
     }
 </style>
 <main>
