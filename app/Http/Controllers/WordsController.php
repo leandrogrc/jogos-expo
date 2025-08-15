@@ -2,23 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Score;
 use Illuminate\Http\Request;
+use App\Models\Score;
 
-class MemoryController extends Controller
+class WordsController extends Controller
 {
     public function store(Request $request)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'time' => 'required|string|max:20'
+            'time' => 'required|string|max:20',
+            'attempts' => 'required|integer'
         ]);
+
+        $errors = 5 - $request->attempts;
 
         try {
             $score = Score::create([
                 'name' => $validated['name'],
                 'time' => $validated['time'],
-                'game' => 'memory'
+                'attempts' => $errors,
+                'game' => 'words'
             ]);
             return back()->with('success', 'Pontuação salva com sucesso!');
         } catch (\Exception $e) {
@@ -29,8 +33,8 @@ class MemoryController extends Controller
     public function ranking()
     {
 
-        $scores = Score::orderBy('time', 'asc')->where('game', 'memory')->limit(5)->get();
+        $scores = Score::orderBy('attempts', 'desc')->orderBy('time', 'asc')->where('game', 'words')->limit(5)->get();
 
-        return view('games.memoria')->with('scores', $scores);
+        return view('games.forca')->with('scores', $scores);
     }
 }

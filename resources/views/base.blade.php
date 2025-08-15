@@ -16,7 +16,8 @@
         }
 
         body {
-            background: linear-gradient(135deg, rgb(0, 18, 91), rgb(10, 55, 103), rgb(22, 90, 162), rgb(74, 144, 218), rgb(121, 121, 255), rgb(255, 255, 255));
+            /* background: linear-gradient(135deg, rgb(0, 18, 91), rgb(10, 55, 103), rgb(22, 90, 162), rgb(74, 144, 218), rgb(121, 121, 255), rgb(255, 255, 255)); */
+            background: linear-gradient(135deg, #121212, #212529, #007BFF, #00CFE8, #6F42C1, #DC3545, #FFC107);
             background-size: 400% 400%;
             animation: gradient 15s ease infinite;
             min-height: 100vh;
@@ -178,9 +179,14 @@
             }
         }
 
-        @media (max-width: 576px) {
+        @media (max-width: 544px) {
             h1 {
                 font-size: 1.8rem;
+            }
+
+            #logo {
+                width: 90%;
+                height: auto;
             }
 
             #buttons {
@@ -205,8 +211,7 @@
 
         #logo,
         #footer-logo {
-            height: 120px;
-            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+            height: 100px;
             transition: transform 0.3s;
         }
 
@@ -225,7 +230,7 @@
 
     <section>
         <header class="section-logo">
-            <img id="logo" src="{{ asset('images/jogos/memoria/logo_gea.png') }}" alt="Logo GEA" />
+            <img id="logo" src="{{ asset('images/jogos/memoria/expo.png') }}" alt="Logo GEA" />
         </header>
 
         @yield('content')

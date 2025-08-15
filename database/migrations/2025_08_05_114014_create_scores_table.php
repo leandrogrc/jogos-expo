@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('time', 9); // formato '00:00:000'
+            $table->string('game');
+            $table->integer('attempts')->nullable();
             $table->timestamps();
         });
     }
