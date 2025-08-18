@@ -15,7 +15,7 @@
         <a href="{{ route('words') }}" class="game-btn">
             <div class="game-icon">🤔</div>
             <div class="game-title">Jogo das Palavras</div>
-            <div class="game-desc">Adivinhe a palavra antes de ser enforcado</div>
+            <div class="game-desc">Adivinhe a palavra antes que suas chances acabem</div>
             <!-- <div class="play-btn">Jogar</div> -->
         </a>
     </div>
