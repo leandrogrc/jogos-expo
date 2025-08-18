@@ -394,7 +394,7 @@
         <div id="score-table">
             <table>
                 <tr>
-                    <th>Nº</th>
+                    <th>Posição</th>
                     <th>Nome</th>
                     <th>Tempo</th>
                 </tr>
